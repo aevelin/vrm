@@ -17,4 +17,4 @@ $app->get('/bookings/create', function () use ($app) {
     });
 
 $app->run()
-
+?>
