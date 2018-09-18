@@ -23,5 +23,11 @@ $app->get('/bookings/create', function () use ($app) {
     return $app['twig']->render('base.html.twig');
     });
 
+use BookingApp\Application;
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+$app = new Application();
+
 $app->run()
 ?>
