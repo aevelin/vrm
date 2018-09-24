@@ -12,7 +12,7 @@ class Application extends SilexApplication
 		parent::__construct($values);
 
 		$this->configureServices();
-		
+		$this->createDBTables();
 		$this->configureControllers();
 	}
 
@@ -36,6 +36,27 @@ class Application extends SilexApplication
             ],
         ]);
     } 
+
+    private function createDBTables()
+    {
+
+    if (!$this['db']->getSchemaManager()->tablesExist('bookings')) {
+            $this['db']->executeQuery("CREATE TABLE bookings (
+                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                firstName VARCHAR(40) NOT NULL,
+                lastName VARCHAR(40) NOT NULL,
+                phone VARCHAR(10) NOT NULL,
+                email VARCHAR(20) DEFAULT NULL,
+                birthday DATE NOT NULL,
+                startDate DATE NOT NULL,
+                endDate DATE NOT NULL,
+                arrivalTime TIME DEFAULT NULL,
+                additionalInformation TEXT,
+                nrOfPeople INT NOT NULL,
+                payingMethod VARCHAR(10) NOT NULL
+            );");
+        }
+    }
 
 private function configureControllers()
     {
